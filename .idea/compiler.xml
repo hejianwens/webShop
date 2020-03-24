@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="webShop-order" />
+        <module name="webShop-discover" />
+        <module name="webShop-goods-api" />
+        <module name="webShop-buyCar" />
+        <module name="webShop-goods" />
+        <module name="webShop-user" />
+        <module name="webShop-zuul" />
+        <module name="webShop-common" />
+        <module name="webShop-buyCar-api" />
+        <module name="webShop-customer-api" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="abs-generator" target="1.8" />
+      <module name="webShop" target="1.8" />
+      <module name="webShop-buyCar" target="1.8" />
+      <module name="webShop-buyCar-api" target="1.8" />
+      <module name="webShop-common" target="1.5" />
+      <module name="webShop-customer-api" target="1.8" />
+      <module name="webShop-discover" target="1.8" />
+      <module name="webShop-feignService" target="1.8" />
+      <module name="webShop-goods" target="1.8" />
+      <module name="webShop-goods-api" target="1.8" />
+      <module name="webShop-order" target="1.8" />
+      <module name="webShop-user" target="1.8" />
+      <module name="webShop-zuul" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="abs-generator" options="-parameters -verbose -bootclasspath &quot;C:/Program Files/Java/jdk1.8.0_91/jre/lib/rt.jar;C:/Program Files/Java/jdk1.8.0_91/jre/lib/jsse.jar;C:/Program Files/Java/jdk1.8.0_91/jre/lib/jce.jar&quot;" />
+      <module name="webShop" options="-parameters" />
+      <module name="webShop-buyCar" options="-parameters" />
+      <module name="webShop-buyCar-api" options="-parameters" />
+      <module name="webShop-common" options="" />
+      <module name="webShop-customer-api" options="-parameters" />
+      <module name="webShop-discover" options="-parameters" />
+      <module name="webShop-feignService" options="" />
+      <module name="webShop-goods" options="-parameters" />
+      <module name="webShop-goods-api" options="-parameters" />
+      <module name="webShop-order" options="-parameters" />
+      <module name="webShop-user" options="-parameters" />
+      <module name="webShop-zuul" options="-parameters" />
+    </option>
+  </component>
+</project>

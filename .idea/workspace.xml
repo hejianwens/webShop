@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="58cb564d-ac6b-448e-9afe-29d4b5e84f40" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="G:\maven\repository\repository" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1X9EV8pSy9RU5WFTmdiruKQl6RL" />
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/webShop-user/src/main/resources/mapper" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15364583" />
+    <property name="project.structure.side.proportion" value="0.5264368" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\ideaFiles\webShop\webShop-goods\target\classes" />
+      <recent name="G:\ideaFiles\webShop\webShop-goods\target\classes\static" />
+      <recent name="G:\idea编译文件\webShop\webShop-goods\src\main\resources\static" />
+      <recent name="G:\idea编译文件\webShop\webShop-order\src\main\resources\mapper" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\ideaFiles\webShop\webShop-user\src\main\resources\mapper" />
+      <recent name="G:\ideaFiles\webShop\webShop-buyCar\src\main\java\com\project\webshop\buycar\util" />
+      <recent name="G:\ideaFiles\webShop\webShop-order\src\main\java\com\project\webshop\order\utils" />
+      <recent name="G:\ideaFiles\webShop\webShop-goods\target\classes\static\goodsImages" />
+      <recent name="G:\ideaFiles\webShop\webShop-goods\target\classes\goodsImages" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.project.webshop.buycar.feign" />
+      <recent name="com.project.webshop.user.controller" />
+      <recent name="com.project.webshop.order.config" />
+      <recent name="com.project.webshop.buycar.config" />
+      <recent name="com.project.webshop.user.util" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.project.webshop.user.mapper" />
+      <recent name="com.project.webshop.user.serviceImpl" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.WebShopGoodsApplication">
+    <configuration name="GetSimilarListUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.project.webshop.goods.utils.GetSimilarListUtil" />
+      <module name="webShop-goods" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.webshop.goods.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.project.webshop.goods.serviceImpl.Test" />
+      <module name="webShop-goods" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.webshop.goods.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="webShop-goods" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.webshop.goods.serviceImpl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.webshop.goods.serviceImpl" />
+      <option name="MAIN_CLASS_NAME" value="com.project.webshop.goods.serviceImpl.Test" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopOrderApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="webShop-order" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.webshop.order.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.webshop.order.service.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.project.webshop.order.service.impl.WebShopOrderApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopOrderApplicationTests.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="webShop-order" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.webshop.order.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.webshop.order.service.impl" />
+      <option name="MAIN_CLASS_NAME" value="com.project.webshop.order.service.impl.WebShopOrderApplicationTests" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopBuyCarApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-buyCar" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.buycar.WebShopBuyCarApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopDiscoverApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-discover" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.discover.WebShopDiscoverApplication" />
+      <option name="ENABLE_JMX_AGENT" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopGoodsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-goods" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.goods.WebShopGoodsApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopOrderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-order" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.order.WebShopOrderApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-user" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.user.WebShopUserApplication" />
+      <option name="ENABLE_JMX_AGENT" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebShopZuulApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-zuul" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.WebShopZuulApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebshopApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="webShop-zuul" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.project.webshop.WebshopApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.GetSimilarListUtil" />
+      <item itemvalue="JUnit.WebShopOrderApplicationTests.test" />
+      <item itemvalue="JUnit.WebShopOrderApplicationTests" />
+      <item itemvalue="JUnit.Test.test" />
+      <item itemvalue="Spring Boot.WebShopUserApplication" />
+      <item itemvalue="Spring Boot.WebShopDiscoverApplication" />
+      <item itemvalue="Spring Boot.WebShopBuyCarApplication" />
+      <item itemvalue="Spring Boot.WebShopGoodsApplication" />
+      <item itemvalue="Spring Boot.WebShopOrderApplication" />
+      <item itemvalue="Spring Boot.WebshopApplication" />
+      <item itemvalue="Spring Boot.WebShopZuulApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Test.test" />
+        <item itemvalue="Application.GetSimilarListUtil" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="JUnit.WebShopOrderApplicationTests.test" />
+        <item itemvalue="JUnit.WebShopOrderApplicationTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="58cb564d-ac6b-448e-9afe-29d4b5e84f40" name="Default Changelist" comment="" />
+      <created>1580449930705</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580449930705</updated>
+      <workItem from="1580449933251" duration="7077000" />
+      <workItem from="1580457169675" duration="411000" />
+      <workItem from="1580457589711" duration="1732000" />
+      <workItem from="1580465917408" duration="121000" />
+      <workItem from="1580466048529" duration="1003000" />
+      <workItem from="1580467071445" duration="9000" />
+      <workItem from="1580467108235" duration="10926000" />
+      <workItem from="1580479352881" duration="386000" />
+      <workItem from="1580527638726" duration="5177000" />
+      <workItem from="1580535385623" duration="11490000" />
+      <workItem from="1580613119031" duration="6498000" />
+      <workItem from="1580975205503" duration="9732000" />
+      <workItem from="1581041819009" duration="8303000" />
+      <workItem from="1581229563348" duration="4793000" />
+      <workItem from="1581300556695" duration="49000" />
+      <workItem from="1581494810564" duration="308000" />
+      <workItem from="1581495138174" duration="2500000" />
+      <workItem from="1581498988116" duration="6401000" />
+      <workItem from="1581514237741" duration="5452000" />
+      <workItem from="1581577942952" duration="8017000" />
+      <workItem from="1581586211015" duration="718000" />
+      <workItem from="1581587153076" duration="13363000" />
+      <workItem from="1581675538342" duration="6174000" />
+      <workItem from="1581737556871" duration="737000" />
+      <workItem from="1581763577174" duration="12297000" />
+      <workItem from="1581819693097" duration="12529000" />
+      <workItem from="1581850541316" duration="8521000" />
+      <workItem from="1581863027428" duration="1512000" />
+      <workItem from="1581865884709" duration="142000" />
+      <workItem from="1581905737728" duration="769000" />
+      <workItem from="1581925174667" duration="1571000" />
+      <workItem from="1581926790775" duration="604000" />
+      <workItem from="1581927399579" duration="17307000" />
+      <workItem from="1581995543788" duration="16000" />
+      <workItem from="1582013055886" duration="9998000" />
+      <workItem from="1582078106612" duration="71000" />
+      <workItem from="1582097329506" duration="11151000" />
+      <workItem from="1582168823849" duration="21668000" />
+      <workItem from="1582210730773" duration="103000" />
+      <workItem from="1582251305495" duration="35000" />
+      <workItem from="1582255135348" duration="15611000" />
+      <workItem from="1582338805170" duration="5255000" />
+      <workItem from="1582441616388" duration="20205000" />
+      <workItem from="1582514796264" duration="14905000" />
+      <workItem from="1582534212057" duration="13782000" />
+      <workItem from="1582596960284" duration="8425000" />
+      <workItem from="1582623447393" duration="632000" />
+      <workItem from="1582626966964" duration="8455000" />
+      <workItem from="1582704674152" duration="12253000" />
+      <workItem from="1582770842079" duration="12727000" />
+      <workItem from="1582799457101" duration="5999000" />
+      <workItem from="1582855229617" duration="5449000" />
+      <workItem from="1582943894504" duration="15000" />
+      <workItem from="1582985764312" duration="1461000" />
+      <workItem from="1583027521574" duration="47000" />
+      <workItem from="1583050445616" duration="12974000" />
+      <workItem from="1584417305953" duration="5245000" />
+      <workItem from="1584605306966" duration="11131000" />
+      <workItem from="1584672378151" duration="11487000" />
+      <workItem from="1584758570641" duration="22633000" />
+      <workItem from="1584844632129" duration="2039000" />
+      <workItem from="1584932292256" duration="9630000" />
+      <workItem from="1585040170064" duration="1212000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="indexes.toArray()[5]" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

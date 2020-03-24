@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebShop-feignService" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebShop-feignService/webShop-buyCar-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebShop-feignService/webShop-customer-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WebShop-feignService/webShop-goods-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-buyCar" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-discover" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-goods" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-user" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webShop-zuul" charset="UTF-8" />
+  </component>
+</project>

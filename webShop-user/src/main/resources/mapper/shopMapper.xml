@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.user.mapper.ShopMapper">
+    <resultMap id="shopBaseResultMap" type="common.model.user.Shop">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="telephone" property="telephone"/>
+        <result column="shop_name" property="shopName"/>
+    </resultMap>
+    <sql id="selectBaseColumn">
+       id,name,password,telephone,shop_name
+    </sql>
+    <select id="findShopByName" resultMap="shopBaseResultMap" parameterType="common.model.user.Shop">
+        select
+        <include refid="selectBaseColumn"/>
+        from shop
+        <where>
+            name=#{name}
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="common.model.user.Shop">
+        insert into shop(name,password,telephone,shop_name)
+        values (#{name},#{password},#{telephone},#{shopName})
+    </insert>
+
+    <update id="updateBySelect" parameterType="common.model.user.Shop">
+        update customer
+        <trim suffixOverrides="," prefix="set">
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                telephone=#{telephone},
+            </if>
+            <if test="shopName!=null and shopName!=''">
+                shop_name=#{shopName},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

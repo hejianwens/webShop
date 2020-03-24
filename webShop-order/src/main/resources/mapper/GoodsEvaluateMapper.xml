@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.order.mapper.GoodsEvaluateMapper">
+     <select id="selectIsOrNotEvaluate" resultType="common.model.order.GoodsEvaluate" parameterType="common.model.order.GoodsEvaluate">
+         select customer_id
+         from goods_evaluate
+         where customer_id=#{customerId}
+     </select>
+
+    <select id="selectMarkAvg" resultType="common.model.order.GoodsEvaluate" parameterType="common.model.order.GoodsEvaluate">
+         select AVG(goods_quality_mark)
+         from goods_evaluate
+         where good_id=#{goodsId}
+     </select>
+
+    <insert id="insertGoodsEvaluate" parameterType="common.model.order.GoodsEvaluate">
+        insert into goods_evaluate
+        (
+        <trim suffixOverrides=",">
+            <if test="goodsId !=null">
+                goods_Id,
+            </if>
+            <if test="goodsQualityMark !=null">
+                goods_quality_mark,
+            </if>
+            <if test="createTime!=null">
+                create_time,
+            </if>
+            <if test="content !=null and content!=''">
+                content,
+            </if>
+            <if test="customerId !=null">
+                customer_id,
+            </if>
+        </trim>
+        )
+        values
+        (
+        <trim suffixOverrides="," >
+            <if test="goodsId !=null">
+                #{goodsId},
+            </if>
+            <if test="goodsQualityMark !=null">
+                #{goodsQualityMark},
+            </if>
+            <if test="createTime !=null">
+                #{createTime},
+            </if>
+            <if test="content!=null and content!=''">
+                #{content},
+            </if>
+            <if test="customerId !=null">
+                #{customerId},
+            </if>
+
+        </trim>
+        )
+
+    </insert>
+
+    <delete id="delete" parameterType="java.math.BigDecimal">
+        delete from goods_evaluate
+        where id=#{id}
+    </delete>
+
+</mapper>

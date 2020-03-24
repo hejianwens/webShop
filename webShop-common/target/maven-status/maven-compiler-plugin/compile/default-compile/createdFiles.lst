@@ -1,0 +1,12 @@
+common\model\goods\Goods.class
+common\model\QueryParams.class
+common\model\user\Customer.class
+common\model\order\Order.class
+common\model\buyCar\BuyCar.class
+common\model\order\OrderItem.class
+common\model\order\ReceiveCreateOrderParams.class
+common\model\goods\GoodsKind.class
+common\model\PageResult.class
+common\enums\GoodsKindEnum.class
+common\model\Result.class
+common\model\user\Shop.class

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.user.mapper.CustomerMapper">
+    <resultMap id="customerBaseResultMap" type="common.model.user.Customer">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="telephone" property="telephone"/>
+        <result column="nick_name" property="nickName"/>
+    </resultMap>
+    <sql id="selectBaseColumn">
+       id,name,password,telephone,nick_name
+    </sql>
+    <select id="findCustomerByName" resultMap="customerBaseResultMap" parameterType="common.model.user.Customer">
+        select
+        <include refid="selectBaseColumn"/>
+        from customer
+        <where>
+            name=#{name}
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="common.model.user.Customer">
+        insert into customer(name,password,telephone,nick_name)
+        values (#{name},#{password},#{telephone},#{nickName})
+
+    </insert>
+
+    <update id="updateBySelect" parameterType="common.model.user.Customer">
+        update customer
+        <trim suffixOverrides="," prefix="set">
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                telephone=#{telephone},
+            </if>
+            <if test="nickName!=null and nickName!=''">
+                nick_name=#{nickName},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+</mapper>

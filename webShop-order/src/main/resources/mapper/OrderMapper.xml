@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.order.mapper.OrderMapper">
+    <resultMap id="baseResultMap" type="common.model.order.Order">
+            <id column="order_number" property="orderNumber" jdbcType="NUMERIC"/>
+        <result column="total" property="total" jdbcType="NUMERIC"/>
+        <result column="create_time" property="createTime" jdbcType="DATE"/>
+        <result column="customer_id" property="customerId" jdbcType="NUMERIC"/>
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+        <result column="receiver_telephone" property="receiverTelephone" jdbcType="VARCHAR"/>
+        <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="evaluate_flag" property="evaluateFlag" jdbcType="VARCHAR"/>
+        <collection property="orderItems" column="order_number" javaType="ArrayList"
+                    ofType="common.model.order.OrderItem"
+                    select="com.project.webshop.order.mapper.OrderItemMapper.findOrderItemsByOrder"/>
+    </resultMap>
+
+    <select id="findOrders" resultMap="baseResultMap" parameterType="common.model.order.Order">
+        select order_number,create_time,total,customer_id,receiver_name,receiver_telephone,receiver_address,status,evaluate_flag
+        from t_order
+        <where>
+            <if test="orderNumber!='' and orderNumber!=null">
+                and order_number = #{orderNumber}
+            </if>
+            <if test="customerId!=null">
+                and customer_id = #{customerId}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+
+
+
+    <insert id="insert" parameterType="common.model.order.Order">
+        insert into t_order(order_number,create_time,total,customer_id,receiver_name,receiver_telephone,receiver_address,status,evaluate_flag)
+        values (
+        #{orderNumber,jdbcType=VARCHAR},
+        #{createTime,jdbcType=DATE},
+        #{total,jdbcType=DECIMAL},
+        #{customerId,jdbcType=DECIMAL},
+        #{receiverName,jdbcType=VARCHAR},
+        #{receiverTelephone,jdbcType=VARCHAR},
+        #{receiverAddress,jdbcType=VARCHAR},
+        #{status,jdbcType=VARCHAR},
+        #{evaluateFlag,jdbcType=VARCHAR}
+        )
+    </insert>
+
+
+
+    <select id="selectStockAmount" resultType="java.math.BigDecimal" parameterType="java.math.BigDecimal">
+        select stock_amount
+        from goods
+        where id=#{id}
+    </select>
+
+    <select id="getRowCount" resultType="java.math.BigInteger">
+        select COUNT(order_number)
+        from t_order
+    </select>
+
+    <update id="updateBySelect" parameterType="common.model.order.Order">
+        update t_order
+        <trim suffixOverrides="," prefix="set">
+            <if test="status!=null and status!=''">
+                status=#{status},
+            </if>
+            <if test="evaluateFlag!=null and evaluateFlag!=''">
+                evaluate_flag=#{evaluateFlag},
+            </if>
+        </trim>
+        <where>
+            <if test="orderNumber!=null and orderNumber!=''">
+                order_number =#{orderNumber}
+            </if>
+        </where>
+    </update>
+
+</mapper>

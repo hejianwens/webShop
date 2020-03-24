@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.goods.mapper.GoodsMapper">
+    <resultMap id="goodsBaseResultMap" type="common.model.goods.Goods">
+        <id column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="stock_amount" property="stockAmount" jdbcType="DECIMAL"/>
+        <result column="kind" property="kind" jdbcType="VARCHAR"/>
+        <result column="image" property="image" jdbcType="VARCHAR"/>
+        <result column="shop_id" property="shopId" jdbcType="DECIMAL"/>
+        <result column="sold_amount" property="soldAmount" jdbcType="DECIMAL"/>
+        <association property="shop"  javaType="common.model.user.Shop">
+            <result column="s_id" property="id"/>
+            <result column="s_name" property="shopName"/>
+        </association>
+
+    </resultMap>
+    <sql id="selectBaseColumn">
+       g.id,g.name,g.price,g.stock_amount,g.kind,g.image,g.shop_id,g.sold_amount
+    </sql>
+    <select id="findGoodsList" resultMap="goodsBaseResultMap" >
+        select
+        <include refid="selectBaseColumn"/>
+        <if test="goods.shopId==null ">
+            ,s.id as s_id,s.shop_name as s_name
+        </if>
+        from goods g
+        <if test="goods.shopId==null ">
+            inner join shop s
+            on  g.shop_id=s.id
+        </if>
+        <where>
+            isDelete = '0'
+            <if test="goods.name!=null and goods.name!= ''">
+                and g.name like "%"#{goods.name}"%"
+            </if>
+            <if test="goods.kind!=null and goods.kind!= ''">
+                and g.kind =  #{goods.kind}
+            </if>
+            <if test="goods.shopId!=null ">
+                and g.shop_id = #{goods.shopId}
+            </if>
+            <if test="goodsKind!=null">
+                or g.kind in
+                <foreach collection="goodsKind" open="(" close=")" separator="," item="kind" index="index">
+                    #{kind}
+                </foreach>
+            </if>
+
+
+
+        </where>
+    </select>
+
+    <select id="findGoodsInfo" resultMap="goodsBaseResultMap" parameterType="common.model.goods.Goods">
+        select
+        <include refid="selectBaseColumn"/>
+        ,s.id as s_id,s.shop_name as s_name
+        from goods g
+        inner join shop s
+        on  g.shop_id=s.id
+        <where>
+            <if test="id!=null">
+                and g.id=#{id}
+            </if>
+        </where>
+    </select>
+
+    <update id="delete" parameterType="common.model.goods.Goods">
+        update goods
+        set isDelete='1'
+        where id = #{id}
+    </update>
+
+    <update id="updateStockAmount" parameterType="common.model.goods.Goods">
+        update goods
+        set stock_amount=#{stockAmount}
+        where id=#{id}
+    </update>
+
+    <select id="selectStockAmountAndSoldAmount" parameterType="common.model.goods.Goods" resultType="common.model.goods.Goods">
+        select stock_amount as stockAmount ,sold_amount as soldAmount
+        from goods
+        where id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="common.model.goods.Goods">
+        insert into
+        goods
+        (name,price,stock_amount,kind,image,shop_id)
+        values (
+          #{name,jdbcType=VARCHAR},
+          #{price,jdbcType=DECIMAL},
+          #{stockAmount,jdbcType=NUMERIC},
+          #{kind,jdbcType=VARCHAR},
+          #{image,jdbcType=VARCHAR},
+          #{shopId,jdbcType=DECIMAL}
+        )
+    </insert>
+    <select id="getGoodsMaxId" resultType="java.math.BigDecimal">
+        select MAX(id)+1 from goods
+    </select>
+
+    <update id="updateGoodsInfo" parameterType="common.model.goods.Goods">
+          update goods
+         <trim prefix="set" suffixOverrides=",">
+             <if test="name !=null and name!=''">
+                 name=#{name},
+             </if>
+             <if test="price !=null">
+                 price=#{price},
+             </if>
+             <if test="stockAmount !=null">
+                 stock_amount=#{stockAmount},
+             </if>
+             <if test="kind !=null and kind!=''">
+                 kind=#{kind},
+             </if>
+             <if test="image !=null and image!=''">
+                 image=#{image},
+             </if>
+             <if test="stockAmount!=null">
+                 stock_amount=#{stockAmount},
+             </if>
+             <if test="soldAmount!=null">
+                 sold_amount=#{soldAmount},
+             </if>
+         </trim>
+         where id =#{id}
+    </update>
+
+    <select id="selectOrderItemCount" resultType="java.math.BigDecimal">
+       select COUNT(id)
+       from order_item
+    </select>
+
+    <select id="selectUnSameGoodsEvaluationCount" resultType="java.math.BigDecimal">
+       SELECT COUNT(goods_id) from (select goods_id
+       from goods_evaluate GROUP BY goods_id)t
+    </select>
+
+    <select id="selectUnSameCustomerEvaluationCount" resultType="java.math.BigDecimal">
+       SELECT COUNT(customer_id) from (select customer_id
+       from goods_evaluate GROUP BY customer_id)t
+    </select>
+
+
+    <select id="getCustomerLikeGoods" resultType="java.math.BigDecimal" parameterType="java.math.BigDecimal">
+       select goods_id
+       from goods_evaluate
+       WHERE goods_quality_mark>4.0 and customer_id=#{customerId}
+       GROUP BY goods_id
+    </select>
+
+
+    <select id="selectGoodsEvaluationCount" resultType="java.lang.Integer" parameterType="java.math.BigDecimal">
+       select COUNT(id)
+       from goods_evaluate
+       where
+       goods_id =#{id}
+    </select>
+
+    <select id="findGoodsInfoEvaluates" resultType="common.model.order.GoodsEvaluate" parameterType="java.math.BigDecimal">
+       select e.goods_quality_mark as goodsQualityMark,e.content,c.nick_name as nickName,e.create_time as createTime,e.id
+       from goods_evaluate e
+       inner join customer c
+       on e.customer_id=c.id
+       where
+       e.goods_id =#{id}
+    </select>
+
+    <select id="findGoodsInfoAvgEvaluate" resultType="java.math.BigDecimal" parameterType="java.math.BigDecimal">
+       select AVG(goods_quality_mark)
+       from goods_evaluate
+       where
+       goods_id =#{id}
+    </select>
+
+    <select id="getAllCustomerId" resultType="java.math.BigDecimal">
+       select id
+       from customer
+    </select>
+
+    <delete id="deleteEvaluate" parameterType="java.math.BigDecimal">
+        delete from goods_evaluate
+        where id=#{id}
+    </delete>
+
+
+
+
+
+</mapper>

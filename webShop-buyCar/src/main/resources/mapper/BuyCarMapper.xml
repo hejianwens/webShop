@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.buycar.mapper.BuyCarMapper">
+    <resultMap id="buyCarBaseResultMap" type="common.model.buyCar.BuyCar">
+        <id column="id" property="id" jdbcType="DECIMAL"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="subtotal" property="subtotal" jdbcType="DECIMAL"/>
+        <result column="customer_id" property="customerId" jdbcType="DECIMAL"/>
+        <result column="one_price" property="onePrice" jdbcType="DECIMAL"/>
+        <result column="goods_id" property="goodsId" jdbcType="DECIMAL"/>
+        <association property="goods"  javaType="common.model.goods.Goods">
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="image" property="image" jdbcType="VARCHAR"/>
+            <result column="shop_id" property="shopId" jdbcType="VARCHAR"/>
+            <result column="kind" property="kind" jdbcType="VARCHAR"/>
+            <result column="stock_amount" property="stockAmount" jdbcType="DECIMAL"/>
+            <result column="isDelete" property="isDelete" jdbcType="VARCHAR"/>
+        </association>
+
+    </resultMap>
+    <sql id="selectBaseColumn">
+       b.id,b.goods_id,b.amount,b.subtotal,b.customer_id,b.one_price,g.name,g.image,g.shop_id,g.kind,g.stock_amount,g.isDelete
+    </sql>
+    <select id="findBuyCarList" resultMap="buyCarBaseResultMap" parameterType="common.model.buyCar.BuyCar">
+        select
+        <include refid="selectBaseColumn"/>
+        from buy_car b
+        inner join goods g
+        on b.goods_id=g.id
+        <where>
+           customer_id = #{customerId}
+        </where>
+    </select>
+
+    <select id="findBuyCarByGoodsId" parameterType="common.model.buyCar.BuyCar" resultType="common.model.buyCar.BuyCar">
+        select b.id,b.goods_id as goodsId,b.amount,b.subtotal,b.customer_id as customerId,b.one_price as onePrice
+        from buy_car b
+        where goods_id=#{goodsId}
+        and customer_id=#{customerId}
+    </select>
+
+    <insert id="insert" parameterType="common.model.buyCar.BuyCar">
+        insert into buy_car
+        (goods_id,amount,subtotal,customer_id,one_price)
+        values
+        (#{goodsId},#{amount},#{subtotal},#{customerId},#{onePrice})
+    </insert>
+
+    <update id="updateAmountAndSubtotal" parameterType="common.model.buyCar.BuyCar">
+        update buy_car
+        set
+        amount=#{amount},subtotal=#{subtotal}
+        where id= #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.util.List">
+        delete from buy_car
+        where id in
+        <foreach collection="list" index="index" item="buyCar" open="(" separator="," close=")">
+            #{buyCar.id}
+        </foreach>
+    </delete>
+
+    <select id="selectById" resultType="common.model.buyCar.BuyCar" parameterType="java.math.BigDecimal">
+        select  b.id,b.goods_id,b.amount,b.subtotal,b.customer_id,b.one_price
+        from buy_car b
+        where id=#{id}
+    </select>
+</mapper>

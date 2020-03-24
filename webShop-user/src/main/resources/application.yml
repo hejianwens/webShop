@@ -1,0 +1,37 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    timeout: 1200
+  application:
+    name: webShop-user
+
+  datasource:
+    password: 123456
+    url: jdbc:mysql://localhost:3306/webShop?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+
+server:
+  port: 8001
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: webShop-user:8001
+    prefer-ip-address: true
+
+

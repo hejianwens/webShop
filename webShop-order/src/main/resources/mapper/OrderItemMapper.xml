@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.webshop.order.mapper.OrderItemMapper">
+    <resultMap id="orderItemsResultMap" type="common.model.order.OrderItem">
+        <id column="id" property="id" jdbcType="NUMERIC"/>
+        <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="NUMERIC"/>
+        <result column="amount" property="amount" jdbcType="NUMERIC"/>
+        <result column="subtotal" property="subtotal" jdbcType="NUMERIC"/>
+        <result column="shop_id" property="shopId" jdbcType="NUMERIC"/>
+        <result column="order_item_status" property="orderItemStatus" jdbcType="VARCHAR"/>
+        <association property="goods" javaType="common.model.goods.Goods">
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="image" property="image" jdbcType="VARCHAR"/>
+        </association>
+        <association property="order" javaType="common.model.order.Order">
+            <result column="create_time" property="createTime" jdbcType="DATE"/>
+            <result column="customer_id" property="customerId" jdbcType="NUMERIC"/>
+            <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+            <result column="receiver_telephone" property="receiverTelephone" jdbcType="VARCHAR"/>
+            <result column="receiver_address" property="receiverAddress" jdbcType="VARCHAR"/>
+            <result column="status" property="status" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="orderItemsByOrderResultMap" type="common.model.order.OrderItem">
+        <id column="id" property="id" jdbcType="NUMERIC"/>
+        <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="goods_id" property="goodsId" jdbcType="NUMERIC"/>
+        <result column="amount" property="amount" jdbcType="NUMERIC"/>
+        <result column="subtotal" property="subtotal" jdbcType="NUMERIC"/>
+        <result column="shop_id" property="shopId" jdbcType="NUMERIC"/>
+        <result column="order_item_status" property="orderItemStatus" jdbcType="VARCHAR"/>
+        <association property="goods" javaType="common.model.goods.Goods">
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="image" property="image" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <select id="findOrderItemsByOrder" resultMap="orderItemsByOrderResultMap" parameterType="java.lang.String">
+        select
+        i.id,i.order_number,i.goods_id,i.amount,i.subtotal,i.shop_id,i.order_item_status,
+        g.name,g.image
+        from order_item i
+        inner join goods g
+        on i.goods_id=g.id
+        <where>
+             i.order_number=#{orderNumber}
+        </where>
+    </select>
+
+    <select id="findOrderItems" resultMap="orderItemsResultMap" parameterType="common.model.order.OrderItem">
+        select
+        i.id,i.order_number,i.goods_id,i.amount,i.subtotal,i.shop_id,i.order_item_status,
+        g.name,g.image,
+        o.create_time,o.customer_id,o.receiver_name,o.receiver_telephone,o.receiver_address,o.status
+        from order_item i
+        inner join goods g
+        on i.goods_id=g.id
+        inner join t_order o
+        on i.order_number=o.order_number
+        <where>
+            <if test="shopId!=null">
+                and i.shop_id=#{shopId}
+            </if>
+            <if test="orderNumber!=null and orderNumber!=''">
+                and i.order_number=#{orderNumber}
+            </if>
+            <if test="orderItemStatus!=null and orderItemStatus!=''">
+                and i.order_item_status=#{orderItemStatus}
+            </if>
+        </where>
+        order by  o.create_time desc
+    </select>
+
+    <select id="findOrderItemStatus" resultType="common.model.order.OrderItem" parameterType="common.model.order.OrderItem">
+        select
+        i.order_item_status as orderItemStatus
+        from order_item i
+        <where>
+            <if test="orderNumber!=null and orderNumber!=''">
+                and i.order_number=#{orderNumber}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertOrderItemList" parameterType="java.util.List">
+        insert into order_item(order_number,goods_id,amount,subtotal,shop_id,order_item_status)
+        values
+        <foreach collection="list" index="index" item="orderItem" separator=",">
+           (
+           #{orderItem.orderNumber,jdbcType=VARCHAR},
+           #{orderItem.goodsId,jdbcType=DECIMAL},
+           #{orderItem.amount,jdbcType=DECIMAL},
+           #{orderItem.subtotal,jdbcType=DECIMAL},
+           #{orderItem.shopId,jdbcType=DECIMAL},
+           #{orderItem.orderItemStatus,jdbcType=VARCHAR}
+           )
+        </foreach>
+
+    </insert>
+
+    <update id="updateBySelect" parameterType="common.model.order.OrderItem">
+        update order_item
+        <trim suffixOverrides="," prefix="set">
+            <if test="orderItemStatus!=null and orderItemStatus!=''">
+                order_item_status=#{orderItemStatus},
+            </if>
+        </trim>
+        <where>
+            <if test="orderNumber!=null and orderNumber!=''">
+                and order_number =#{orderNumber}
+            </if>
+            <if test="id!=null">
+                 and id =#{id}
+            </if>
+        </where>
+    </update>
+
+
+</mapper>

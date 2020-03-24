@@ -1,0 +1,56 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    timeout: 1200
+
+
+  application:
+    name: webShop-goods
+
+  datasource:
+    password: 123456
+    url: jdbc:mysql://localhost:3306/webShop?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+  servlet:
+    multipart:
+      location: /data/upload_tmp
+      max-request-size: 10MB
+      max-file-size: 10MB
+
+server:
+  port: 8003
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+  instance:
+    instance-id: webShop-goods:8003
+    prefer-ip-address: true
+
+logging:
+  level:
+    com.project.webshop.goods.mapper.GoodsMapper: debug
+
+
+
+#info:
+#  app.name: test-cloud
+#  company.name: wwww.testCloud.com
+#  build.artifactId: $project.artifactId$
+#  builid.version: $project.version$
+
+
