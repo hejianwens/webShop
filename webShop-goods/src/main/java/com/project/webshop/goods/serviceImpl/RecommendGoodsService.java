@@ -33,14 +33,20 @@ public class RecommendGoodsService {
 
     public Result getRecommendGoods(String loginKey) {
 
-        Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
-        result= CheckLogin.checkCustomerLogin(customer,loginKey);
-        if(result!=null){
-            return result;
-        }
-        result=new Result();
+        Result result=new Result();
         List<Goods>goodsList=null;
+        if("".equals(loginKey)){
+            goodsList=doRandomGoods();;
+            result.setCode("200");
+            result.setData(goodsList);
+            return  result;
+        }
+        Customer customer= (Customer) redisUtil.get(loginKey);
+        if(null==customer){
+            result.setCode("500");
+            result.setData("系统出错，登录信息错误");
+            return  result;
+        }
         Set<BigDecimal>topTenUserSimilarGoodsIdSet;
         //先看看订单子项表和评论表有没有达到要求，如果没有则直接按照平时浏览爱好推介,是从redis拿
         BigDecimal unSameCustomerEvaluationCount=goodsMapper.selectUnSameCustomerEvaluationCount();
@@ -51,7 +57,7 @@ public class RecommendGoodsService {
             //能从Redis拿证明已经经过计算，而且这个设置了一天的过期时间
             String topTenUserSimilarGoodsIdSetKey=loginKey+"TopTenUserSimilarGoodsIdSet";
             SimilarCustomersLikeGoods s= (SimilarCustomersLikeGoods) redisUtil.get(topTenUserSimilarGoodsIdSetKey);
-            if(s!=null&&s.getTopTenUserSimilarGoodsIdSet().size()>10){
+            if(s!=null&&s.getTopTenUserSimilarGoodsIdSet()!=null&&s.getTopTenUserSimilarGoodsIdSet().size()>10){
                 topTenUserSimilarGoodsIdSet=s.getTopTenUserSimilarGoodsIdSet();
                 goodsList= getGoodsBySetUtil.getGoodsList(topTenUserSimilarGoodsIdSet);
                 goodsList=getRandomListByList(goodsList);

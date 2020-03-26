@@ -9,9 +9,12 @@ import common.model.Result;
 import common.model.goods.Goods;
 import common.model.order.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,14 +27,29 @@ public class GoodsController {
 
     //通过名字搜商品
     @RequestMapping(value = "/findGoodsListByName",method = RequestMethod.GET)
-    public Result findGoodsListByName(QueryParams qps, Goods goods,@CookieValue("loginKey")String loginKey){
+    public Result findGoodsListByName(QueryParams qps, Goods goods,HttpServletRequest request){
+        String loginKey=new String("");
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie:cookies){
+            if("loginKey".equals(cookie.getName())){
+                loginKey=cookie.getValue();
+            }
+        }
+
         Result result=goodsServiceImpl.findGoodsListByName(qps,goods,loginKey);
         return result;
     }
 
     //通过类别搜商品
     @RequestMapping(value = "/findGoodsListByKind",method = RequestMethod.GET)
-    public Result findGoodsListByKind(QueryParams qps, Goods goods,@CookieValue("loginKey")String loginKey){
+    public Result findGoodsListByKind(QueryParams qps, Goods goods, HttpServletRequest request){
+        String loginKey=new String("");
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie:cookies){
+            if("loginKey".equals(cookie.getName())){
+                loginKey=cookie.getValue();
+            }
+        }
         Result result=goodsServiceImpl.findGoodsListByKind(qps,goods,loginKey);
         return result;
     }

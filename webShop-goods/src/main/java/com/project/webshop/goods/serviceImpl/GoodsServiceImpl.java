@@ -51,7 +51,9 @@ public class GoodsServiceImpl implements GoodsService {
         List<String>goodKinds=getKinds(goods.getName());
         PageHelper.startPage(qps.getPage(),qps.getRows());
         List<Goods> goodsList=goodsMapper.findGoodsList(goods,goodKinds);
-        doRecommendStore(loginKey,goodsList);
+        if(!"".equals(loginKey)){
+            doRecommendStore(loginKey,goodsList);
+        }
         goodsList=setEvaluateCount(goodsList);
         PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
         PageResult pageResult = PageUtils.getPageResult(qps,pageInfo);
@@ -87,7 +89,9 @@ public class GoodsServiceImpl implements GoodsService {
         List<String>goodKinds=null;
         PageHelper.startPage(qps.getPage(),qps.getRows());
         List<Goods> goodsList=goodsMapper.findGoodsList(goods,goodKinds);
-        doRecommendStore(loginKey,goodsList);
+        if(!"".equals(loginKey)){
+            doRecommendStore(loginKey,goodsList);
+        }
         goodsList=setEvaluateCount(goodsList);
         PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
         PageResult pageResult = PageUtils.getPageResult(qps,pageInfo);
