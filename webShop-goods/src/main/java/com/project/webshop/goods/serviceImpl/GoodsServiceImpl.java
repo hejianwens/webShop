@@ -40,19 +40,16 @@ public class GoodsServiceImpl implements GoodsService {
     RedisUtil redisUtil;
 
     public Result findGoodsListByName(QueryParams qps, Goods goods,String loginKey) {
-        Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
-        result=CheckLogin.checkCustomerLogin(customer,loginKey);
-        if(result!=null){
-            return result;
-        }
-        result=new Result();
+        Result result=new Result();
         //储存商品类别,懒加载，用来接收商品名称联想
         List<String>goodKinds=getKinds(goods.getName());
         PageHelper.startPage(qps.getPage(),qps.getRows());
         List<Goods> goodsList=goodsMapper.findGoodsList(goods,goodKinds);
         if(!"".equals(loginKey)){
-            doRecommendStore(loginKey,goodsList);
+            Customer customer= (Customer) redisUtil.get(loginKey);
+            if(null!=customer){
+                doRecommendStore(loginKey,goodsList);
+            }
         }
         goodsList=setEvaluateCount(goodsList);
         PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
@@ -79,18 +76,15 @@ public class GoodsServiceImpl implements GoodsService {
 
 
     public Result findGoodsListByKind(QueryParams qps, Goods goods,String loginKey) {
-        Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
-        result=CheckLogin.checkCustomerLogin(customer,loginKey);
-        if(result!=null){
-            return result;
-        }
-        result=new Result();
+        Result result=new Result();
         List<String>goodKinds=null;
         PageHelper.startPage(qps.getPage(),qps.getRows());
         List<Goods> goodsList=goodsMapper.findGoodsList(goods,goodKinds);
         if(!"".equals(loginKey)){
-            doRecommendStore(loginKey,goodsList);
+            Customer customer= (Customer) redisUtil.get(loginKey);
+            if(null!=customer){
+                doRecommendStore(loginKey,goodsList);
+            }
         }
         goodsList=setEvaluateCount(goodsList);
         PageInfo<Goods> pageInfo = new PageInfo<Goods>(goodsList);
