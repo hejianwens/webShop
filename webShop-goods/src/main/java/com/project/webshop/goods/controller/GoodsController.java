@@ -95,7 +95,7 @@ public class GoodsController {
     //获得商品详细信息
     @RequestMapping(value = "/findGoodsInfo",method = RequestMethod.GET)
     public Result findGoodsInfo(Goods goods){
-        Result result=goodsServiceImpl.findGoodsInfo(goods.getId());
+        Result result=goodsServiceImpl.findGoodsInfo(goods);
         return result;
     }
 
