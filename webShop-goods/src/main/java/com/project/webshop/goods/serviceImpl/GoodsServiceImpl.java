@@ -46,7 +46,12 @@ public class GoodsServiceImpl implements GoodsService {
         PageHelper.startPage(qps.getPage(),qps.getRows());
         List<Goods> goodsList=goodsMapper.findGoodsList(goods,goodKinds);
         if(!"".equals(loginKey)){
-            Customer customer= (Customer) redisUtil.get(loginKey);
+            Customer customer=null;
+            try {
+                customer= (Customer) redisUtil.get(loginKey);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if(null!=customer){
                 doRecommendStore(loginKey,goodsList);
             }
@@ -81,7 +86,12 @@ public class GoodsServiceImpl implements GoodsService {
         PageHelper.startPage(qps.getPage(),qps.getRows());
         List<Goods> goodsList=goodsMapper.findGoodsList(goods,goodKinds);
         if(!"".equals(loginKey)){
-            Customer customer= (Customer) redisUtil.get(loginKey);
+            Customer customer=null;
+            try {
+                customer= (Customer) redisUtil.get(loginKey);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             if(null!=customer){
                 doRecommendStore(loginKey,goodsList);
             }
@@ -118,7 +128,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     public Result delete(Goods goods, String loginKey) {
         Result result;
-        Shop shop= (Shop) redisUtil.get(loginKey);
+        Shop shop;
+        try {
+            shop= (Shop) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result=CheckLogin.checkShopLoginKey(shop,loginKey);
         if(result!=null){
             return result;
@@ -166,7 +184,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     public Result insert(Goods goods,String loginKey) {
         Result result=new Result();
-        Shop shop= (Shop) redisUtil.get(loginKey);
+        Shop shop;
+        try {
+            shop= (Shop) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result=CheckLogin.checkShopLoginKey(shop,loginKey);
         if(result!=null){
             return result;
@@ -201,7 +227,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     public Result uploadImage(MultipartFile multipartFile, BigDecimal id, String loginKey) throws IOException {
         Result result;
-        Shop shop= (Shop) redisUtil.get(loginKey);
+        Shop shop;
+        try {
+            shop= (Shop) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result=CheckLogin.checkShopLoginKey(shop,loginKey);
         if(result!=null){
             return result;
@@ -242,7 +276,15 @@ public class GoodsServiceImpl implements GoodsService {
     public Result findGoodsListByShopHost(QueryParams qps, Goods goods, String loginKey) {
         Result result;
         List<String>goodKinds=null;
-        Shop shop= (Shop) redisUtil.get(loginKey);
+        Shop shop;
+        try {
+            shop= (Shop) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
 
         result=CheckLogin.checkShopLoginKey(shop,loginKey);
         if(result!=null){
@@ -267,7 +309,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     public Result updateGoodsInfo(Goods goods, String loginKey) {
         Result result;
-        Shop shop= (Shop) redisUtil.get(loginKey);
+        Shop shop;
+        try {
+            shop= (Shop) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkShopLoginKey(shop, loginKey);
         if(result!=null){
             return result;

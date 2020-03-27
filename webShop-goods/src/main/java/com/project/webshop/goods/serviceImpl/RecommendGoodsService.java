@@ -10,7 +10,6 @@ import common.model.goods.Goods;
 import common.model.goods.RecommendGoodsStructure;
 import common.model.goods.SimilarCustomersLikeGoods;
 import common.model.user.Customer;
-import common.utils.CheckLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +40,12 @@ public class RecommendGoodsService {
             result.setData(goodsList);
             return  result;
         }
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer=null;
+        try {
+             customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         if(null==customer){
             result.setCode("500");
             result.setData("系统出错，登录信息错误");

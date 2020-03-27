@@ -41,7 +41,15 @@ public class OrderItemServiceImpl {
 
     public Result findOrderItems(OrderItem orderItem, QueryParams qps, String loginKey) {
         Result result;
-        Shop shop= (Shop) redisUtil.get(loginKey);
+        Shop shop;
+        try {
+            shop= (Shop) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkShopLoginKey(shop,loginKey);
         if(result!=null){
             return result;
@@ -60,7 +68,15 @@ public class OrderItemServiceImpl {
 
     public Result insertEvaluate(List<GoodsEvaluate> goodsEvaluates, String loginKey) {
         Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer;
+        try {
+            customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkCustomerLogin(customer,loginKey);
         if(result!=null){
             return result;

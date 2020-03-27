@@ -29,7 +29,15 @@ public class BuyCarServiceImpl implements BuyCarService {
 
     public Result findBuyCarById(BuyCar buyCar,String loginKey) {
         Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer;
+        try {
+            customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkCustomerLogin(customer,loginKey);
         if(result!=null){
             return result;
@@ -56,7 +64,15 @@ public class BuyCarServiceImpl implements BuyCarService {
 
     public Result insert(BuyCar buyCar,String loginKey) {
         Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer;
+        try {
+            customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkCustomerLogin(customer,loginKey);
         if(result!=null){
             return result;
@@ -121,7 +137,15 @@ public class BuyCarServiceImpl implements BuyCarService {
     @Override
     public Result delete(List<BuyCar> buyCars,String loginKey) {
         Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer;
+        try {
+            customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkCustomerLogin(customer,loginKey);
         if(result!=null){
             return result;
@@ -153,7 +177,15 @@ public class BuyCarServiceImpl implements BuyCarService {
 
     public Result addOneAmount(BuyCar buyCar,String loginKey) {
         Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer;
+        try {
+            customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkCustomerLogin(customer,loginKey);
         if(result!=null){
             return result;
@@ -177,7 +209,15 @@ public class BuyCarServiceImpl implements BuyCarService {
 
     public Result subtractOneAmount(BuyCar buyCar,String loginKey) {
         Result result;
-        Customer customer= (Customer) redisUtil.get(loginKey);
+        Customer customer;
+        try {
+            customer= (Customer) redisUtil.get(loginKey);
+        }catch (Exception e){
+            result=new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return  result;
+        }
         result= CheckLogin.checkCustomerLogin(customer,loginKey);
         if(result!=null){
             return result;
