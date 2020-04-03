@@ -209,6 +209,26 @@ public class OrderServiceImpl {
         Order order=new Order();
         order.setStatus(OrderStatusEnum.AlreadyApply.getValue());
         order.setOrderNumber(orderNumber);
+
+        result=checkOrderStatus(order,OrderStatusEnum.HaveNotApply.getValue(),result);
+        if(!"".equals(result.getCode())){
+            return result;
+        }
+
+//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+//        if(selectOrder==null){
+//            result.setMessage("支付失败，订单号错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+//        if(!OrderStatusEnum.HaveNotApply.getValue().equals(selectOrder.getOrderNumber())){
+//            result.setMessage("支付失败，订单号对应订单状态错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+
         orderMapper.updateBySelect(order);
 
         OrderItem orderItem=new OrderItem();
@@ -270,12 +290,31 @@ public class OrderServiceImpl {
             result.setMessage("失败，订单号为空");
             return result;
         }
+        result=checkOrderStatus(order,OrderStatusEnum.AlreadyApply.getValue(),result);
+        if(!"".equals(result.getCode())){
+            return result;
+        }
+
+//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+//        if(selectOrder==null){
+//            result.setMessage("发货失败，订单号错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+//        if(!OrderStatusEnum.AlreadyApply.getValue().equals(selectOrder.getOrderNumber())){
+//            result.setMessage("发货失败，订单号对应订单状态错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
         OrderItem orderItem=new OrderItem();
         orderItem.setId(orderItemId);
         orderItem.setOrderItemStatus(OrderStatusEnum.AlreadySend.getValue());
         orderItem.setOrderNumber(order.getOrderNumber());
 
         orderItemMapper.updateBySelect(orderItem);
+
         changOrderStatus(order.getOrderNumber(),OrderStatusEnum.AlreadySend.getValue());
 
         result.setCode("200");
@@ -304,6 +343,24 @@ public class OrderServiceImpl {
             result.setMessage("失败，订单号为空");
             return result;
         }
+        result=checkOrderStatus(order,OrderStatusEnum.AlreadySend.getValue(),result);
+        if(!"".equals(result.getCode())){
+            return result;
+        }
+//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+//        if(selectOrder==null){
+//            result.setMessage("收货失败，订单号错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+//        if(!OrderStatusEnum.AlreadySend.getValue().equals(selectOrder.getOrderNumber())){
+//            result.setMessage("收货失败，订单号对应订单状态错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+
         order.setStatus(OrderStatusEnum.AlreadyReceive.getValue());
         orderMapper.updateBySelect(order);
 
@@ -338,6 +395,25 @@ public class OrderServiceImpl {
             result.setMessage("失败，订单号为空");
             return result;
         }
+
+        result=checkOrderStatus(order,OrderStatusEnum.AlreadyReceive.getValue(),result);
+        if(!"".equals(result.getCode())){
+            return result;
+        }
+//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+//        if(selectOrder==null){
+//            result.setMessage("取消订单失败，订单号错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+//        if(!OrderStatusEnum.AlreadyReceive.getValue().equals(selectOrder.getOrderNumber())){
+//            result.setMessage("取消订单失败，订单号对应订单状态错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+
         order.setStatus(OrderStatusEnum.WaitRefund.getValue());
         orderMapper.updateBySelect(order);
 
@@ -365,6 +441,25 @@ public class OrderServiceImpl {
             result.setMessage("失败，订单号为空");
             return result;
         }
+
+        result=checkOrderStatus(order,OrderStatusEnum.WaitRefund.getValue(),result);
+//        if(!"".equals(result.getCode())){
+//            return result;
+//        }
+//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+//        if(selectOrder==null){
+//            result.setMessage("退款失败，订单号错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+//        if(!OrderStatusEnum.WaitRefund.getValue().equals(selectOrder.getOrderNumber())){
+//            result.setMessage("退款失败，订单号对应订单状态错误");
+//            result.setCode("500");
+//            result.setData(null);
+//            return result;
+//        }
+
         OrderItem orderItem=new OrderItem();
         orderItem.setId(orderItemId);
         orderItem.setOrderItemStatus(OrderStatusEnum.AlreadyCancel.getValue());
@@ -375,6 +470,25 @@ public class OrderServiceImpl {
 
         result.setCode("200");
         result.setMessage("成功");
+        return result;
+    }
+
+    private Result checkOrderStatus(Order order, String value, Result result) {
+
+        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+        if(selectOrder==null){
+            result.setMessage("支付失败，订单号错误");
+            result.setCode("500");
+            result.setData(null);
+            return result;
+        }
+        if(!value.equals(selectOrder.getOrderNumber())){
+            result.setMessage("请求失败，订单号对应订单状态错误，订单号对应状态为:"+selectOrder.getStatus());
+            result.setCode("500");
+            result.setData(null);
+            return result;
+        }
+
         return result;
     }
 

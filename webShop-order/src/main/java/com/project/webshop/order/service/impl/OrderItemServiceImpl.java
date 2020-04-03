@@ -89,13 +89,26 @@ public class OrderItemServiceImpl {
             return result;
         }
         Order order=new Order();
+        order.setOrderNumber(goodsEvaluates.get(0).getOrderNumber());
+        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
+        if(selectOrder==null){
+            result.setMessage("参数错误，订单号不正确");
+            result.setCode("500");
+            result.setData(null);
+            return result;
+        }
+        if("y".equals(selectOrder.getEvaluateFlag())){
+            result.setCode("500");
+            result.setMessage("参数错误，订单已经被评价");
+            result.setData(null);
+            return result;
+        }
         for(GoodsEvaluate goodsEvaluate:goodsEvaluates){
             goodsEvaluate.setCustomerId(customer.getId());
             Timestamp timestamp=new Timestamp(System.currentTimeMillis());
             String createTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(timestamp);
             goodsEvaluate.setCreateTime(createTime);
             goodsEvaluateMapper.insertGoodsEvaluate(goodsEvaluate);
-            order.setOrderNumber(goodsEvaluate.getOrderNumber());
         }
         order.setEvaluateFlag("y");
         orderMapper.updateBySelect(order);

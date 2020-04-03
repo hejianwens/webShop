@@ -23,6 +23,7 @@ public interface OrderMapper {
 
     List<Order> findOrders(Order order);
 
+    Order findOrderByOrderNumber(Order order);
 
 
 

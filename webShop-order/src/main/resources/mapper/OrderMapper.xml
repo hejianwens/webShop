@@ -30,6 +30,19 @@
         order by create_time desc
     </select>
 
+    <select id="findOrderByOrderNumber" resultType="common.model.order.Order" parameterType="common.model.order.Order">
+        select order_number as orderNumber,create_time as createTime,total,customer_id as customerId,
+        receiver_name as receiverName,receiver_telephone as receiverTelephone,receiver_address as receiverAddress,
+        status,evaluate_flag as evaluateFlag
+        from t_order
+        <where>
+            <if test="orderNumber!='' and orderNumber!=null">
+                and order_number = #{orderNumber}
+            </if>
+        </where>
+    </select>
+
+
 
 
     <insert id="insert" parameterType="common.model.order.Order">
