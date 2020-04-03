@@ -211,7 +211,7 @@ public class OrderServiceImpl {
         order.setOrderNumber(orderNumber);
 
         result=checkOrderStatus(order,OrderStatusEnum.HaveNotApply.getValue(),result);
-        if(!"".equals(result.getCode())){
+        if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
 
@@ -291,7 +291,7 @@ public class OrderServiceImpl {
             return result;
         }
         result=checkOrderStatus(order,OrderStatusEnum.AlreadyApply.getValue(),result);
-        if(!"".equals(result.getCode())){
+        if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
 
@@ -344,7 +344,7 @@ public class OrderServiceImpl {
             return result;
         }
         result=checkOrderStatus(order,OrderStatusEnum.AlreadySend.getValue(),result);
-        if(!"".equals(result.getCode())){
+        if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
 //        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
@@ -397,7 +397,7 @@ public class OrderServiceImpl {
         }
 
         result=checkOrderStatus(order,OrderStatusEnum.AlreadyReceive.getValue(),result);
-        if(!"".equals(result.getCode())){
+        if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
 //        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
@@ -443,9 +443,9 @@ public class OrderServiceImpl {
         }
 
         result=checkOrderStatus(order,OrderStatusEnum.WaitRefund.getValue(),result);
-//        if(!"".equals(result.getCode())){
-//            return result;
-//        }
+        if(result.getCode()!=null&&!"".equals(result.getCode())){
+            return result;
+        }
 //        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
 //        if(selectOrder==null){
 //            result.setMessage("退款失败，订单号错误");
@@ -482,7 +482,7 @@ public class OrderServiceImpl {
             result.setData(null);
             return result;
         }
-        if(!value.equals(selectOrder.getOrderNumber())){
+        if(!value.equals(selectOrder.getStatus())){
             result.setMessage("请求失败，订单号对应订单状态错误，订单号对应状态为:"+selectOrder.getStatus());
             result.setCode("500");
             result.setData(null);
