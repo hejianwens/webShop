@@ -6,8 +6,7 @@ import common.model.buyCar.BuyCar;
 import common.model.goods.Goods;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "/goods")
 public interface GoodsFeignService {
 
-    @RequestMapping(value = "/findGoodsInfo",method = RequestMethod.GET)
-    public Result findGoodsInfo(Goods goods);
+    @RequestMapping(value = "/findGoodsInfoByFeign",method = RequestMethod.POST)
+    public Result findGoodsInfoByFeign(@RequestBody Goods selectGoods);
 
 }

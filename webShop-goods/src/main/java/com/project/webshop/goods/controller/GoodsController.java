@@ -8,6 +8,7 @@ import common.model.QueryParams;
 import common.model.Result;
 import common.model.goods.Goods;
 import common.model.order.OrderItem;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
@@ -112,10 +113,18 @@ public class GoodsController {
 
     //获得商品详细信息
     @RequestMapping(value = "/findGoodsInfo",method = RequestMethod.GET)
-    public Result findGoodsInfo(Goods goods){
-        Result result=goodsServiceImpl.findGoodsInfo(goods);
+    public Result findGoodsInfo(Goods selectGoods){
+        Result result=goodsServiceImpl.findGoodsInfo(selectGoods);
         return result;
     }
+
+    @RequestMapping(value = "/findGoodsInfoByFeign",method = RequestMethod.POST)
+    public Result findGoodsInfoByFeign(@RequestBody Goods selectGoods){
+        Result result=goodsServiceImpl.findGoodsInfo(selectGoods);
+        return result;
+    }
+
+
 
     //寻找商品的评价
     @RequestMapping(value = "/findGoodsInfoEvaluates",method = RequestMethod.GET)

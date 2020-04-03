@@ -82,20 +82,14 @@ public class BuyCarServiceImpl implements BuyCarService {
         //先检查前端上送的商品id是否存在
         Goods selectGoods=new Goods();
         selectGoods.setId(buyCar.getGoodsId());
-        Result selectResult=goodsFeignService.findGoodsInfo(selectGoods);
+        Result selectResult=goodsFeignService.findGoodsInfoByFeign(selectGoods);
         if(!"200".equals(selectResult.getCode())){
             result.setCode("200");
-            result.setMessage("失败，远程调用商品系统错误");
+            result.setMessage("失败，远程调用商品系统错误，商品不存在或者已经被删除");
             result.setData(null);
             return result;
         }
-        Goods goods= (Goods) result.getData();
-        if(null==goods||"1".equals(goods.getIsDelete())){
-            result.setCode("200");
-            result.setMessage("失败，商品不存在或者已经被删除");
-            result.setData(null);
-            return result;
-        }
+
         //检查表里是否有同样的
         BuyCar selectBuyCar=buyCarMapper.findBuyCarByGoodsId(buyCar);
         //有就直接加数量
