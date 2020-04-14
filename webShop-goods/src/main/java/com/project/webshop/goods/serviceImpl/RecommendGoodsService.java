@@ -47,8 +47,10 @@ public class RecommendGoodsService {
             e.printStackTrace();
         }
         if(null==customer){
+            goodsList=doRandomGoods();;
             result.setCode("500");
-            result.setData("系统出错，登录信息错误");
+            result.setMessage("系统出错，登录信息错误");
+            result.setData(goodsList);
             return  result;
         }
         Set<BigDecimal>topTenUserSimilarGoodsIdSet;

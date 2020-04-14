@@ -215,20 +215,6 @@ public class OrderServiceImpl {
             return result;
         }
 
-//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
-//        if(selectOrder==null){
-//            result.setMessage("支付失败，订单号错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
-//        if(!OrderStatusEnum.HaveNotApply.getValue().equals(selectOrder.getOrderNumber())){
-//            result.setMessage("支付失败，订单号对应订单状态错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
-
         orderMapper.updateBySelect(order);
 
         OrderItem orderItem=new OrderItem();
@@ -295,26 +281,13 @@ public class OrderServiceImpl {
             return result;
         }
 
-//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
-//        if(selectOrder==null){
-//            result.setMessage("发货失败，订单号错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
-//        if(!OrderStatusEnum.AlreadyApply.getValue().equals(selectOrder.getOrderNumber())){
-//            result.setMessage("发货失败，订单号对应订单状态错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
         OrderItem orderItem=new OrderItem();
         orderItem.setId(orderItemId);
         orderItem.setOrderItemStatus(OrderStatusEnum.AlreadySend.getValue());
         orderItem.setOrderNumber(order.getOrderNumber());
 
         orderItemMapper.updateBySelect(orderItem);
-
+        //检查订单关联子订单是否已经全部改变，如果是就改变订单状态，否则不改变
         changOrderStatus(order.getOrderNumber(),OrderStatusEnum.AlreadySend.getValue());
 
         result.setCode("200");
@@ -347,19 +320,6 @@ public class OrderServiceImpl {
         if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
-//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
-//        if(selectOrder==null){
-//            result.setMessage("收货失败，订单号错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
-//        if(!OrderStatusEnum.AlreadySend.getValue().equals(selectOrder.getOrderNumber())){
-//            result.setMessage("收货失败，订单号对应订单状态错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
 
         order.setStatus(OrderStatusEnum.AlreadyReceive.getValue());
         orderMapper.updateBySelect(order);
@@ -400,19 +360,6 @@ public class OrderServiceImpl {
         if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
-//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
-//        if(selectOrder==null){
-//            result.setMessage("取消订单失败，订单号错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
-//        if(!OrderStatusEnum.AlreadyReceive.getValue().equals(selectOrder.getOrderNumber())){
-//            result.setMessage("取消订单失败，订单号对应订单状态错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
 
         order.setStatus(OrderStatusEnum.WaitRefund.getValue());
         orderMapper.updateBySelect(order);
@@ -446,19 +393,6 @@ public class OrderServiceImpl {
         if(result.getCode()!=null&&!"".equals(result.getCode())){
             return result;
         }
-//        Order selectOrder=orderMapper.findOrderByOrderNumber(order);
-//        if(selectOrder==null){
-//            result.setMessage("退款失败，订单号错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
-//        if(!OrderStatusEnum.WaitRefund.getValue().equals(selectOrder.getOrderNumber())){
-//            result.setMessage("退款失败，订单号对应订单状态错误");
-//            result.setCode("500");
-//            result.setData(null);
-//            return result;
-//        }
 
         OrderItem orderItem=new OrderItem();
         orderItem.setId(orderItemId);
@@ -549,6 +483,7 @@ public class OrderServiceImpl {
             OrderStatus orderStatus=new OrderStatus();
             orderStatus.setName(orderStatusEnum.getName());
             orderStatus.setValue(orderStatusEnum.getValue());
+            orderStatuses.add(orderStatus);
         }
         result.setCode("200");
         result.setMessage("成功");

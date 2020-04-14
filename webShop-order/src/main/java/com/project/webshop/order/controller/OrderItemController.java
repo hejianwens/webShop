@@ -11,6 +11,7 @@ import common.model.order.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,14 @@ public class OrderItemController {
         Result result= orderServiceImpl.insertEvaluate(goodsEvaluates,loginKey);;
         return result;
     }
+
+
+    @RequestMapping(value = "/deleteEvaluate",method = RequestMethod.GET)
+    public Result deleteEvaluate(BigDecimal id, @CookieValue("loginKey") String loginKey) {
+        Result result= orderServiceImpl.deleteEvaluate(id,loginKey);;
+        return result;
+    }
+
 
 
 

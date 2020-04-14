@@ -15,6 +15,7 @@ import common.model.order.Order;
 import common.model.order.OrderItem;
 import common.model.user.Customer;
 import common.model.user.Shop;
+import common.model.user.SuperManager;
 import common.utils.CheckLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -118,4 +119,28 @@ public class OrderItemServiceImpl {
         result.setData(null);
         return result;
     }
+
+    public Result deleteEvaluate(BigDecimal id, String loginKey) {
+        SuperManager superManager;
+        Result result;
+        try {
+            superManager = (SuperManager) redisUtil.get(loginKey);
+        } catch (Exception e) {
+            result = new Result();
+            result.setCode("500");
+            result.setData("权限出错，登录信息错误");
+            return result;
+        }
+        result = CheckLogin.checkSuperManagerLogin(superManager, loginKey);
+        if (result != null) {
+            return result;
+        }
+        result=new Result();
+        goodsEvaluateMapper.delete(id);
+        result.setCode("200");
+        result.setMessage("成功");
+        result.setData(null);
+        return result;
+    }
+
 }

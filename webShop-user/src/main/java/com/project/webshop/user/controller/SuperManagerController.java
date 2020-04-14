@@ -10,23 +10,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-@RequestMapping(value = "/superManager")
+@RequestMapping(value = "/superUser")
 public class SuperManagerController {
 
-        @Autowired
-        SuperManagerServiceImpl superManagerServiceImpl;
+    @Autowired
+    SuperManagerServiceImpl superManagerServiceImpl;
 
-        @RequestMapping(value = "/findByName" ,method = RequestMethod.POST)
-        public Result findByName(@RequestBody SuperManager superManager){
-            Result result=superManagerServiceImpl.findByName(superManager);
-            return result;
-        }
+    @RequestMapping(value = "/findByName", method = RequestMethod.POST)
+    public Result findByName(@RequestBody SuperManager superManager) {
+        Result result = superManagerServiceImpl.findByName(superManager);
+        return result;
+    }
 
-
-
-
-
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.GET)
+    public Result checkLogin(String loginKey) {
+        Result result = superManagerServiceImpl.checkLogin(loginKey);
+        return result;
+    }
 
 
 }

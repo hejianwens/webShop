@@ -19,13 +19,22 @@ public class SuperManagerServiceImpl {
     public Result findByName(SuperManager superManager) {
         Result result=new Result();
         SuperManager selectSuperManager=superManagerMapper.findByName(superManager.getAccount());
-        if(!selectSuperManager.getPassword().equals(superManager.getPassword())){
+        if(selectSuperManager==null){
             result.setCode("500");
-            result.setMessage("密码不正确");
+            result.setMessage("账号不存在");
+            result.setData(null);
+            return result;
+        }else if(!selectSuperManager.getPassword().equals(selectSuperManager.getPassword())){
+            result.setCode("500");
+            result.setMessage("密码错误");
+            result.setData(null);
             return result;
         }
+        String key="superManager"+selectSuperManager.getId();
+        redisUtil.set(key,selectSuperManager,60*60*24);
         result.setCode("200");
         result.setMessage("成功");
+        result.setData(key);
         return result;
     }
 

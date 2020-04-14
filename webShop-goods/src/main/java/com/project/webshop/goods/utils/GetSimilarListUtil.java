@@ -33,8 +33,9 @@ public class GetSimilarListUtil {
         return topTenUserSimilarList;
     }
 
-    //利用快排算法，对相似度进行排序
+
     private static BigDecimal[][] sortList(BigDecimal[][] similarUserList,int low,int high) {
+        //利用快排算法，对相似度进行排序
         int i,j;
         BigDecimal temp=null;
         BigDecimal t0=null;
@@ -63,7 +64,6 @@ public class GetSimilarListUtil {
                 similarUserList[j][1]=similarUserI;
                 similarUserList[i][1]=similarUserJ;
             }
-
         }
         //这时 跳出了 “while (i<j) {}” 循环,说明 i=j 左右在同一位置
         //最后将基准为与i和j相等位置的数字交换
@@ -76,7 +76,6 @@ public class GetSimilarListUtil {
         sortList(similarUserList, low, j-1);
         //递归调用右半数组
         sortList(similarUserList, j+1, high);
-
         return similarUserList;
     }
 

@@ -124,8 +124,6 @@ public class GoodsController {
         return result;
     }
 
-
-
     //寻找商品的评价
     @RequestMapping(value = "/findGoodsInfoEvaluates",method = RequestMethod.GET)
     public Result findGoodsInfoEvaluates(BigDecimal id){
@@ -133,6 +131,12 @@ public class GoodsController {
         return result;
     }
 
+    @RequestMapping(value = "/findGoodsListBySuperUser",method = RequestMethod.GET)
+    public Result findGoodsListBySuperUser(QueryParams qps, Goods goods,@CookieValue("loginKey") String loginKey){
+
+        Result result=goodsServiceImpl.findGoodsListBySuperUser(qps,goods,loginKey);
+        return result;
+    }
 
 
 

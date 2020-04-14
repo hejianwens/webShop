@@ -42,7 +42,8 @@ public class PutRecommendGoodsSetUtil {
             return;
         }
         //用工具取前十的用户喜欢商品id列表，会自动剔除目标用户喜欢的商品
-        Set<BigDecimal>topTenUserSimilarGoodsIdSet= getGoodsBySetUtil.countMainMethod(customerLikeList,targetCustomerLikeMap,topTenUserSimilarList);
+        Set<BigDecimal>topTenUserSimilarGoodsIdSet= getGoodsBySetUtil.countMainMethod(customerLikeList,
+                targetCustomerLikeMap,topTenUserSimilarList);
         String storeKey="customer"+customerId.toString()+"TopTenUserSimilarGoodsIdSet";
         SimilarCustomersLikeGoods similarCustomersLikeGoods =new SimilarCustomersLikeGoods();
         Timestamp timestamp=new Timestamp(System.currentTimeMillis());

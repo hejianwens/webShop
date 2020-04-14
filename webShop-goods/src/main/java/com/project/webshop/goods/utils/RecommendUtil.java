@@ -54,6 +54,7 @@ public class RecommendUtil implements ApplicationRunner {
         BigDecimal thirty=new BigDecimal("30");
         BigDecimal one=new BigDecimal("100");
         if(unSameCustomerEvaluationCount.compareTo(thirty)!=-1&&unSameGoodsEvaluationCount.compareTo(one)!=-1){
+            //达到限制条件启动推介计算
             recommend();
         }
 

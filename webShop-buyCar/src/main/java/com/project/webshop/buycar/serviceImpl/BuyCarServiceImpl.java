@@ -51,7 +51,9 @@ public class BuyCarServiceImpl implements BuyCarService {
             if(b.getGoods().getIsDelete().equals("1")){
                 b.setIsDelete("1");
             }
-            if(b.getGoods().getStockAmount().compareTo(new BigDecimal("0"))==0||b.getGoods().getStockAmount().compareTo(new BigDecimal("0"))==-1){
+            //检查库存是否为零
+            if(b.getGoods().getStockAmount().compareTo(new BigDecimal("0"))==0
+                    ||b.getGoods().getStockAmount().compareTo(new BigDecimal("0"))==-1){
                 b.setIsStockEnough("0");
             }
         }
@@ -185,7 +187,7 @@ public class BuyCarServiceImpl implements BuyCarService {
             return result;
         }
         result=new Result();
-        //计算小计的价钱
+        //计算数量、小计的价钱
         BigDecimal amount=buyCar.getAmount();
         BigDecimal subtotal=buyCar.getSubtotal();
 
