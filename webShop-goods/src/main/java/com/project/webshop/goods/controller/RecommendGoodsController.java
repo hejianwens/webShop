@@ -23,9 +23,11 @@ public class RecommendGoodsController {
     public Result getRecommendGoods(HttpServletRequest request){
         String loginKey=new String("");
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            if("loginKey".equals(cookie.getName())){
-                loginKey=cookie.getValue();
+        if(cookies!=null&&cookies.length>0){
+            for(Cookie cookie:cookies){
+                if("loginKey".equals(cookie.getName())){
+                    loginKey=cookie.getValue();
+                }
             }
         }
         Result result=recommendGoodsService.getRecommendGoods(loginKey);

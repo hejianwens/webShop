@@ -31,9 +31,11 @@ public class GoodsController {
     public Result findGoodsListByName(QueryParams qps, Goods goods,HttpServletRequest request){
         String loginKey=new String("");
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            if("loginKey".equals(cookie.getName())){
-                loginKey=cookie.getValue();
+        if(cookies!=null&&cookies.length>0){
+            for(Cookie cookie:cookies){
+                if("loginKey".equals(cookie.getName())){
+                    loginKey=cookie.getValue();
+                }
             }
         }
 
@@ -46,9 +48,11 @@ public class GoodsController {
     public Result findGoodsListByKind(QueryParams qps, Goods goods, HttpServletRequest request){
         String loginKey=new String("");
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            if("loginKey".equals(cookie.getName())){
-                loginKey=cookie.getValue();
+        if(cookies!=null&&cookies.length>0){
+            for(Cookie cookie:cookies){
+                if("loginKey".equals(cookie.getName())){
+                    loginKey=cookie.getValue();
+                }
             }
         }
         Result result=goodsServiceImpl.findGoodsListByKind(qps,goods,loginKey);
